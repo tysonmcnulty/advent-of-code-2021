@@ -29,4 +29,3 @@ def calc_increases(depths_file):
 
 
 calc_increases("day01_depths_test.txt")
-
