@@ -2,7 +2,7 @@ import unittest
 
 from src.day02 import load_steps, calc_position
 
-class DayO1Tests(unittest.TestCase):
+class DayO2Tests(unittest.TestCase):
     def test_load_steps(self):
         self.assertEqual([
             ["forward", 5],
