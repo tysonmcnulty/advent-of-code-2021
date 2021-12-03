@@ -16,5 +16,12 @@ class DayO1Tests(unittest.TestCase):
         self.assertEqual(1000, len(load_steps('data/day02_steps_tm.txt')))
 
     def test_calc_position(self):
-        self.assertEqual({ "x": 15, "y": 10 }, calc_position('data/day02_steps_test.txt'))
-        self.assertEqual({ "x": 1971, "y": 830 }, calc_position('data/day02_steps_tm.txt'))
+        self.assertEqual(150, self.get_solution(calc_position('data/day02_steps_test.txt')))
+        self.assertEqual(1635930, self.get_solution(calc_position('data/day02_steps_tm.txt')))
+
+    def test_calc_position_with_aim(self):
+        self.assertEqual(900, self.get_solution(calc_position('data/day02_steps_test.txt', use_aim = True)))
+        self.assertEqual(1781819478, self.get_solution(calc_position('data/day02_steps_tm.txt', use_aim = True)))
+
+    def get_solution(self, position):
+        return position["x"] * position["y"]
