@@ -1,6 +1,6 @@
 import unittest
 
-from src.day03 import load_diagnostics, calc_gamma_rate, calc_epsilon_rate
+from src.day03 import calc_oxygen_generator_rating, calc_co2_scrubber_rating, load_diagnostics, calc_gamma_rate, calc_epsilon_rate
 
 class DayO3Tests(unittest.TestCase):
     def test_load_diagnostics(self):
@@ -37,3 +37,11 @@ class DayO3Tests(unittest.TestCase):
     def test_calc_epsilon_rate(self):
         self.assertEqual(9, calc_epsilon_rate(load_diagnostics('data/day03_diagnostics_test.txt')))
         self.assertEqual(2279, calc_epsilon_rate(load_diagnostics('data/day03_diagnostics_tm.txt')))
+
+    def test_calc_oxygen_generator_rating(self):
+        self.assertEqual(23, calc_oxygen_generator_rating(load_diagnostics('data/day03_diagnostics_test.txt')))
+        self.assertEqual(2031, calc_oxygen_generator_rating(load_diagnostics('data/day03_diagnostics_tm.txt')))
+
+    def test_calc_co2_scrubber_rating(self):
+        self.assertEqual(10, calc_co2_scrubber_rating(load_diagnostics('data/day03_diagnostics_test.txt')))
+        self.assertEqual(2104, calc_co2_scrubber_rating(load_diagnostics('data/day03_diagnostics_tm.txt')))
