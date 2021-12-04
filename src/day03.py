@@ -6,26 +6,29 @@ def load_diagnostics(diagnostics_file):
         return [line.strip() for line in dfile]
 
 def calc_gamma_rate(diagnostics):
-    diagnostic_length = get_diagnostic_length(diagnostics)
-
-    def update_occurrences(occurrences, diagnostic):
-        for i, c in enumerate(diagnostic):
-            occurrences[i][c] += 1
-
-        return occurrences
-
-    occurrences = reduce(
-        update_occurrences,
-        diagnostics,
-        [defaultdict(lambda: 0) for _ in range(diagnostic_length)]
-    )
-
-    gamma_rate_str = ''.join([max(o, key = o.get) for o in occurrences])
-
+    occurrences = get_occurrences(diagnostics)
+    gamma_rate_str = ''.join([max(o, key = lambda c: len(o.get(c))) for o in occurrences])
     return int(gamma_rate_str, base = 2)
 
 def calc_epsilon_rate(diagnostics):
-    return (2**get_diagnostic_length(diagnostics) - 1) - calc_gamma_rate(diagnostics)
+    occurrences = get_occurrences(diagnostics)
+    epsilon_rate_str = ''.join([min(o, key = lambda c: len(o.get(c))) for o in occurrences])
+    return int(epsilon_rate_str, base = 2)
 
 def get_diagnostic_length(diagnostics):
     return len(diagnostics[0])
+
+def get_occurrences(diagnostics):
+    diagnostic_length = get_diagnostic_length(diagnostics)
+
+    def update_occurrences(occurrences, enum_diagnostic):
+        for i, c in enumerate(enum_diagnostic[1]):
+            occurrences[i][c].add(enum_diagnostic[0])
+
+        return occurrences
+
+    return reduce(
+        update_occurrences,
+        enumerate(diagnostics),
+        [defaultdict(lambda: set()) for _ in range(diagnostic_length)]
+    )
