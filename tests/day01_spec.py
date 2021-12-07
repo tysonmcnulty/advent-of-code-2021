@@ -2,7 +2,7 @@ import unittest
 
 from src.day01 import calc_increases, load_depths
 
-class DayO1Tests(unittest.TestCase):
+class Day01Tests(unittest.TestCase):
     def test_load_depths(self):
         self.assertEqual([199, 200, 208, 210, 200, 207, 240, 269, 260, 263], load_depths('data/day01_depths_test.txt'))
         self.assertEqual(2000, len(load_depths('data/day01_depths_bm.txt')))

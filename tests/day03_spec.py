@@ -2,7 +2,7 @@ import unittest
 
 from src.day03 import calc_oxygen_generator_rating, calc_co2_scrubber_rating, load_diagnostics, calc_gamma_rate, calc_epsilon_rate
 
-class DayO3Tests(unittest.TestCase):
+class Day03Tests(unittest.TestCase):
     def test_load_diagnostics(self):
         self.assertEqual([
             "00100",
