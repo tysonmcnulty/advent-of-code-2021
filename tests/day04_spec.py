@@ -1,6 +1,6 @@
 import unittest
 
-from src.day04 import load_bingo, BingoBoard, find_win
+from src.day04 import load_bingo, BingoBoard, find_wins
 
 class Day04Tests(unittest.TestCase):
     def test_load_bingo(self):
@@ -41,26 +41,40 @@ class Day04Tests(unittest.TestCase):
         self.assertEqual(100, len(tm_draws))
         self.assertEqual(100, len(tm_boards))
 
-    def test_find_win(self):
+    def test_find_first_win(self):
         boards, draws = load_bingo('data/day04_bingo_test.txt')
 
-        winning_board_index, winning_draw_index = find_win(boards, draws)
-        self.assertEqual(winning_board_index, 2)
-        self.assertEqual(winning_draw_index, 11)
+        first_win_board_index, first_win_draw_index = find_wins(boards, draws).__next__()
+        self.assertEqual(2, first_win_board_index)
+        self.assertEqual(11, first_win_draw_index)
+        self.assertEqual(4512, boards[first_win_board_index].get_score(draws[:(first_win_draw_index + 1)]))
 
-        self.assertFalse(any(map(lambda c: c.has_bingo(set(draws[:11])), boards)))
+        self.assertFalse(any(map(lambda b: b.has_bingo(set(draws[:first_win_draw_index])), boards)))
 
-        self.assertFalse(boards[0].has_bingo(set(draws[:12])))
-        self.assertFalse(boards[1].has_bingo(set(draws[:12])))
-        self.assertTrue(boards[2].has_bingo(set(draws[:12])))
+        self.assertFalse(boards[0].has_bingo(set(draws[:(first_win_draw_index + 1)])))
+        self.assertFalse(boards[1].has_bingo(set(draws[:(first_win_draw_index + 1)])))
+        self.assertTrue(boards[2].has_bingo(set(draws[:(first_win_draw_index + 1)])))
 
-        self.assertEqual(4512, boards[2].get_score(draws[:12]))
-
-    def test_find_win_tm(self):
+    def test_find_first_win_tm(self):
         boards, draws = load_bingo('data/day04_bingo_tm.txt')
 
-        winning_board_index, winning_draw_index = find_win(boards, draws)
+        winning_board_index, winning_draw_index = find_wins(boards, draws).__next__()
 
-        self.assertEqual(winning_board_index, 36)
-        self.assertEqual(winning_draw_index, 30)
+        self.assertEqual(36, winning_board_index)
+        self.assertEqual(30, winning_draw_index)
         self.assertEqual(5685, boards[36].get_score(draws[:31]))
+
+    def test_find_last_win(self):
+        boards, draws = load_bingo('data/day04_bingo_test.txt')
+        *_, last_win = find_wins(boards, draws)
+        last_win_board_index, last_win_draw_index = last_win
+
+        self.assertEqual('13', draws[last_win_draw_index])
+        self.assertEqual(1924, boards[last_win_board_index].get_score(draws[:(last_win_draw_index + 1)]))
+
+    def test_find_last_win_tm(self):
+        boards, draws = load_bingo('data/day04_bingo_tm.txt')
+        *_, last_win = find_wins(boards, draws)
+
+        self.assertEqual(85, last_win[1])
+        self.assertEqual(21070, boards[last_win[0]].get_score(draws[:(last_win[1] + 1)]))

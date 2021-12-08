@@ -10,10 +10,10 @@ def load_bingo(bingo_file):
             if not line.isspace():
                 board_rows.append(line.strip().split())
 
-    boards = [ BingoBoard(board_rows[i:(i + num_rows_per_board)])
-        for i in range(0, len(board_rows), num_rows_per_board)
+    boards = [
+        BingoBoard(board_rows[i:(i + num_rows_per_board)])
+            for i in range(0, len(board_rows), num_rows_per_board)
     ]
-
 
     return (boards, draws)
 
@@ -44,8 +44,10 @@ class BingoBoard:
         return sum_of_unmarked_values * last_draw_value
 
 
-def find_win(boards, draws):
+def find_wins(boards, draws):
+    won_board_indices = set()
     for j in range(len(draws)):
         for i, board in enumerate(boards):
-            if board.has_bingo(set(draws[:(j + 1)])):
-                return (i, j)
+            if i not in won_board_indices and board.has_bingo(set(draws[:(j + 1)])):
+                won_board_indices.add(i)
+                yield (i, j)
