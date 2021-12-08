@@ -1,21 +1,23 @@
+from itertools import chain
+
 def load_bingo(bingo_file):
-    card_rows = []
-    num_rows_per_card = 5
+    board_rows = []
+    num_rows_per_board = 5
     with open(bingo_file, "r") as file:
         draws = file.__next__().strip().split(',')
 
         for line in file:
             if not line.isspace():
-                card_rows.append(line.strip().split())
+                board_rows.append(line.strip().split())
 
-    cards = [ BingoCard(card_rows[i:(i + num_rows_per_card)])
-        for i in range(0, len(card_rows), num_rows_per_card)
+    boards = [ BingoBoard(board_rows[i:(i + num_rows_per_board)])
+        for i in range(0, len(board_rows), num_rows_per_board)
     ]
 
 
-    return (cards, draws)
+    return (boards, draws)
 
-class BingoCard:
+class BingoBoard:
     def __init__(self, grid):
         self.grid = grid
         row_size = len(grid[0])
@@ -36,9 +38,14 @@ class BingoCard:
     def has_bingo(self, draws):
         return any(map(lambda b: b <= draws, self.bingos))
 
+    def get_score(self, draws):
+        sum_of_unmarked_values = sum(map(int, set(chain.from_iterable(self.grid)) - set(draws)))
+        last_draw_value = int(draws[-1])
+        return sum_of_unmarked_values * last_draw_value
 
-def get_earliest_win(cards, draws):
 
-    winning_card = cards[2]
-    winning_draw_index = 11
-    return (cards[2], 11)
+def find_win(boards, draws):
+    for j in range(len(draws)):
+        for i, board in enumerate(boards):
+            if board.has_bingo(set(draws[:(j + 1)])):
+                return (i, j)
