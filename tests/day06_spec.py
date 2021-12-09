@@ -1,5 +1,4 @@
 import unittest
-import os
 
 from src.day06 import load_lanternfish, create_population, simulate
 

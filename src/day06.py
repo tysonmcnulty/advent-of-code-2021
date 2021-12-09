@@ -1,5 +1,4 @@
 from functools import reduce
-from collections import defaultdict
 
 def load_lanternfish(lanternfish_file):
     with open(lanternfish_file, "r") as file:
