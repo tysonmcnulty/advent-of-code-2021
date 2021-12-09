@@ -1,0 +1,189 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\Dad> f:
+PS F:\> cd advent-of-code-2021
+PS F:\advent-of-code-2021> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   day01.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .vscode/
+        test_day01.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS F:\advent-of-code-2021> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   day01.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .vscode/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS F:\advent-of-code-2021> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   day01.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .vscode/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+PS F:\advent-of-code-2021> git checkout day01.py
+Updated 1 path from the index
+PS F:\advent-of-code-2021> git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .vscode/
+
+nothing added to commit but untracked files present (use "git add" to track)
+PS F:\advent-of-code-2021> git pull
+remote: Enumerating objects: 34, done.
+remote: Counting objects: 100% (34/34), done.
+remote: Compressing objects: 100% (20/20), done.
+remote: Total 32 (delta 12), reused 29 (delta 9), pack-reused 0
+Unpacking objects: 100% (32/32), 4.98 KiB | 4.00 KiB/s, done.
+From https://github.com/tysonmcnulty/advent-of-code-2021
+ * [new branch]      tm-day01   -> origin/tm-day01
+ * [new branch]      tm-day02   -> origin/tm-day02
+Already up to date.
+PS F:\advent-of-code-2021> git log --oneline --all --graph --decorate
+>>
+* 31a1980 (origin/tm-day02) Add day 2 puzzle 2 solution
+* 127b250 Add day 2 puzzle 1
+* a7a0905 Add load_steps
+* 53e253d (origin/tm-day01) Update README
+* e309c01 Add day 1 puzzle 2 solution
+* daca92a (HEAD -> main, origin/main, origin/HEAD) Add tm depths file
+* c72843b Add tool versions file
+* 4fc49b2 Day 1 puzzle #1
+* 4cb946d Initial commit
+PS F:\advent-of-code-2021> git checkout tm-day02
+Switched to a new branch 'tm-day02'
+Branch 'tm-day02' set up to track remote branch 'tm-day02' from 'origin'.
+PS F:\advent-of-code-2021> git log --oneline --all --graph --decorate
+>>
+* 31a1980 (HEAD -> tm-day02, origin/tm-day02) Add day 2 puzzle 2 solution
+* 127b250 Add day 2 puzzle 1
+* a7a0905 Add load_steps
+* 53e253d (origin/tm-day01) Update README
+* e309c01 Add day 1 puzzle 2 solution
+* daca92a (origin/main, origin/HEAD, main) Add tm depths file
+* c72843b Add tool versions file
+* 4fc49b2 Day 1 puzzle #1
+* 4cb946d Initial commit
+PS F:\advent-of-code-2021> git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+PS F:\advent-of-code-2021> git log --oneline --all --graph --decorate
+>>
+* 31a1980 (origin/tm-day02, tm-day02) Add day 2 puzzle 2 solution
+* 127b250 Add day 2 puzzle 1
+* a7a0905 Add load_steps
+* 53e253d (origin/tm-day01) Update README
+* e309c01 Add day 1 puzzle 2 solution
+* daca92a (HEAD -> main, origin/main, origin/HEAD) Add tm depths file
+* c72843b Add tool versions file
+* 4fc49b2 Day 1 puzzle #1
+* 4cb946d Initial commit
+PS F:\advent-of-code-2021> git merge tm-day02
+Updating daca92a..31a1980
+Fast-forward
+ README.md                                          |   12 +-
+ day01_depths_bm.txt => data/day01_depths_bm.txt    |    0
+ .../day01_depths_test.txt                          |    0
+ day01_depths_tm.txt => data/day01_depths_tm.txt    |    0
+ data/day02_steps_test.txt                          |    6 +
+ data/day02_steps_tm.txt                            | 1000 ++++++++++++++++++++
+ day01.py                                           |   31 -
+ src/__init__.py                                    |    0
+ src/day01.py                                       |   24 +
+ src/day02.py                                       |   41 +
+ tests/day01_spec.py                                |   19 +
+ tests/day02_spec.py                                |   27 +
+ 12 files changed, 1128 insertions(+), 32 deletions(-)
+ rename day01_depths_bm.txt => data/day01_depths_bm.txt (100%)
+ rename day01_depths_test.txt => data/day01_depths_test.txt (100%)
+ rename day01_depths_tm.txt => data/day01_depths_tm.txt (100%)
+ create mode 100644 data/day02_steps_test.txt
+ create mode 100644 data/day02_steps_tm.txt
+ delete mode 100644 day01.py
+ create mode 100644 src/__init__.py
+ create mode 100644 src/day01.py
+ create mode 100644 src/day02.py
+ create mode 100644 tests/day01_spec.py
+ create mode 100644 tests/day02_spec.py
+PS F:\advent-of-code-2021> git log --oneline --all --graph --decorate
+>>
+* 31a1980 (HEAD -> main, origin/tm-day02, tm-day02) Add day 2 puzzle 2 solution
+* 127b250 Add day 2 puzzle 1
+* a7a0905 Add load_steps
+* 53e253d (origin/tm-day01) Update README
+* e309c01 Add day 1 puzzle 2 solution
+* daca92a (origin/main, origin/HEAD) Add tm depths file
+* c72843b Add tool versions file
+* 4fc49b2 Day 1 puzzle #1
+* 4cb946d Initial commit
+PS F:\advent-of-code-2021> python -m unittest discover -s tests -p '*_spec.py'
+......
+----------------------------------------------------------------------
+Ran 6 tests in 0.035s
+
+OK
+PS F:\advent-of-code-2021> git log --oneline --all --graph --decorate
+>>
+* 1c2ffb5 (HEAD -> main) Add vscode json local settings
+* 31a1980 (origin/tm-day02, tm-day02) Add day 2 puzzle 2 solution
+* 127b250 Add day 2 puzzle 1
+* a7a0905 Add load_steps
+* 53e253d (origin/tm-day01) Update README
+* e309c01 Add day 1 puzzle 2 solution
+* daca92a (origin/main, origin/HEAD) Add tm depths file
+* c72843b Add tool versions file
+* 4fc49b2 Day 1 puzzle #1
+* 4cb946d Initial commit
+PS F:\advent-of-code-2021> git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 491 bytes | 491.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/tysonmcnulty/advent-of-code-2021.git
+   daca92a..1c2ffb5  main -> main
+PS F:\advent-of-code-2021> git log --oneline --all --graph --decorate
+>>
+* 1c2ffb5 (HEAD -> main, origin/main, origin/HEAD) Add vscode json local settings
+* 31a1980 (origin/tm-day02, tm-day02) Add day 2 puzzle 2 solution
+* 127b250 Add day 2 puzzle 1
+* a7a0905 Add load_steps
+* 53e253d (origin/tm-day01) Update README
+* e309c01 Add day 1 puzzle 2 solution
+* daca92a Add tm depths file
+* c72843b Add tool versions file
+* 4fc49b2 Day 1 puzzle #1
+* 4cb946d Initial commit
+PS F:\advent-of-code-2021>
