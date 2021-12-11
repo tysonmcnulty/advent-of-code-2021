@@ -1,6 +1,6 @@
 import unittest
 
-from src.day07 import LinearCrabPositionOptimizer, load_crab_positions
+from src.day07 import LinearCrabPositionOptimizer, TriangularCrabPositionOptimizer, load_crab_positions
 
 class Day07Tests(unittest.TestCase):
     def test_load_crab_positions(self):
@@ -13,3 +13,7 @@ class Day07Tests(unittest.TestCase):
         linear_optimizer = LinearCrabPositionOptimizer()
         self.assertEqual((2, 37), linear_optimizer.get_optimum(crab_positions_test))
         self.assertEqual((376, 352707), linear_optimizer.get_optimum(crab_positions_tm))
+
+        triangular_optimizer = TriangularCrabPositionOptimizer()
+        self.assertEqual((5, 168), triangular_optimizer.get_optimum(crab_positions_test))
+        self.assertEqual((490, 95519693), triangular_optimizer.get_optimum(crab_positions_tm))
