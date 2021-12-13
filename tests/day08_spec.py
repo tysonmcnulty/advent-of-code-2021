@@ -2,7 +2,7 @@ import unittest
 
 from src.day08 import load_display_data, DisplayDecoder
 
-class Day07Tests(unittest.TestCase):
+class Day08Tests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
