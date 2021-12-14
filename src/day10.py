@@ -52,6 +52,4 @@ def get_total_completion_score(navigation_subsystem):
         incomplete_parse_results
     ))
 
-    print(sorted_completion_scores)
-
     return sorted_completion_scores[int(len(sorted_completion_scores)/2)]
