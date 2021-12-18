@@ -3,11 +3,7 @@ from functools import partial
 
 def load_octopus_energy_levels(octopus_energy_levels_file):
     with open(octopus_energy_levels_file, "r") as file:
-        octopus_energy_levels = []
-        for line in file:
-            octopus_energy_levels.append(list(map(int, line.strip())))
-
-        return octopus_energy_levels
+        return [ list(map(int, line.strip())) for line in file ]
 
 
 class EventEmitter:
@@ -20,6 +16,7 @@ class EventEmitter:
     def emit(self, event_name, event_data = None):
         for listener in self._listeners[event_name]:
             listener(event_data)
+
 
 class OctopusGrid(EventEmitter):
     def __init__(self, octopus_energy_levels):
