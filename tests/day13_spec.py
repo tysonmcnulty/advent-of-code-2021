@@ -1,7 +1,5 @@
 import unittest
 
-from collections import Counter
-
 from src.day13 import load_instructions, fold, write_activation_code
 
 class Day13Tests(unittest.TestCase):

@@ -2,8 +2,8 @@ import re
 
 from functools import reduce
 
-def load_instructions(cave_connections_file):
-    with open(cave_connections_file, "r") as file:
+def load_instructions(instructions_file):
+    with open(instructions_file, "r") as file:
         dots = set()
         for dot_line in file:
             if not re.match(r"\d+,\d+", dot_line): break
