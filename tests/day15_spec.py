@@ -1,3 +1,4 @@
+import os
 import unittest
 
 from src.day15 import load_risk_levels, navigate, Cave
@@ -23,7 +24,7 @@ class Day15Tests(unittest.TestCase):
             [2, 3, 1, 1, 9, 4, 4, 5, 8, 1],
         ], self.risk_levels_test)
 
-    def test_navigate(self):
+    def test_navigate_cave(self):
         start = (0, 0)
         end = (9, 9)
         get_total_risk_level, get_safest_path = navigate(Cave(self.risk_levels_test), start)
@@ -39,9 +40,20 @@ class Day15Tests(unittest.TestCase):
                 (7, 3), (7, 4), (8, 4), (8, 5), (8, 6), (8, 7), (8, 8), (9, 8), (9, 9),
             ]])
 
-    def test_navigate_tm(self):
+        expanded_end = (49, 49)
+        get_total_risk_level, _ = navigate(Cave(self.risk_levels_test, expansion_factor = 5), start)
+
+        self.assertEqual(315, get_total_risk_level(expanded_end, exclude_start = True))
+
+    @unittest.skipUnless(bool(os.getenv('AOC_RUN_SLOW_TESTS')), 'slow test')
+    def test_navigate_expanded_cave_tm(self):
         start = (0, 0)
         end = (99, 99)
         get_total_risk_level, _ = navigate(Cave(self.risk_levels_tm), start)
 
         self.assertEqual(373, get_total_risk_level(end, exclude_start = True))
+
+        expanded_end = (499, 499)
+        get_total_risk_level_expanded, _ = navigate(Cave(self.risk_levels_tm, expansion_factor = 5), start)
+
+        self.assertEqual(315, get_total_risk_level_expanded(expanded_end, exclude_start = True))

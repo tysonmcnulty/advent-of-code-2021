@@ -37,19 +37,22 @@ def navigate(cave, start):
     return partial(get_total_risk_level, min_risks, start), partial(get_safest_path, hops_back)
 
 class Cave:
-    def __init__(self, risk_levels):
+    def __init__(self, risk_levels, expansion_factor = 1):
         self._risk_levels = risk_levels
+        self._expansion_factor = expansion_factor
 
     def get_neighbors(self, position):
         i, j, = position
         neighbors = set()
         if j > 0: neighbors.add((i, j - 1))
         if i > 0: neighbors.add((i - 1, j))
-        if j < len(self._risk_levels) - 1: neighbors.add((i, j + 1))
-        if i < len(self._risk_levels[j]) - 1: neighbors.add((i + 1, j))
+        if j < len(self._risk_levels) * self._expansion_factor - 1: neighbors.add((i, j + 1))
+        if i < len(self._risk_levels[j % len(self._risk_levels)]) * self._expansion_factor - 1: neighbors.add((i + 1, j))
 
         return neighbors
 
     def get_risk_level(self, position):
         i, j = position
-        return self._risk_levels[j][i]
+        j_factor, inner_j = divmod(j, len(self._risk_levels))
+        i_factor, inner_i = divmod(i, len(self._risk_levels[inner_j]))
+        return (self._risk_levels[inner_j][inner_i] + i_factor + j_factor - 1) % 9 + 1
