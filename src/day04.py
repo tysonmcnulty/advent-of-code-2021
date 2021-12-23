@@ -4,7 +4,7 @@ def load_bingo(bingo_file):
     board_rows = []
     num_rows_per_board = 5
     with open(bingo_file, "r") as file:
-        draws = file.__next__().strip().split(',')
+        draws = next(file).strip().split(',')
 
         for line in file:
             if not line.isspace():
@@ -19,7 +19,7 @@ def load_bingo(bingo_file):
 
 class BingoBoard:
     def __init__(self, grid):
-        self.grid = grid
+        self._grid = grid
         row_size = len(grid[0])
         column_size = len(grid)
 
@@ -32,6 +32,10 @@ class BingoBoard:
                     for i in range(row_size)]
         ]
 
+    @property
+    def grid(self):
+        return self._grid
+
     def __eq__(self, other):
         return self.grid == other.grid
 
@@ -39,7 +43,7 @@ class BingoBoard:
         return any(map(lambda b: b <= draws, self.bingos))
 
     def get_score(self, draws):
-        sum_of_unmarked_values = sum(map(int, set(chain.from_iterable(self.grid)) - set(draws)))
+        sum_of_unmarked_values = sum(map(int, set(chain.from_iterable(self._grid)) - set(draws)))
         last_draw_value = int(draws[-1])
         return sum_of_unmarked_values * last_draw_value
 
