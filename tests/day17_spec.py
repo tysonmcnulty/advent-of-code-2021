@@ -1,4 +1,3 @@
-import os
 import unittest
 
 from src.day17 import load_target_area, launch_probe, aim, aim_high, get_highest_y_position
