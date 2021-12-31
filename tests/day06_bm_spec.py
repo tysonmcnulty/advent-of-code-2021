@@ -74,3 +74,4 @@ class Day05Tests(unittest.TestCase):
         self.assertEqual(26984457539, sum(part_2_simulation(age_counts, 256)))
         age_counts_bm = load_file_part_2("data/day06_lanternfish_bm.txt")
         self.assertEqual(1589590444365, sum(part_2_simulation(age_counts_bm, 256)))
+

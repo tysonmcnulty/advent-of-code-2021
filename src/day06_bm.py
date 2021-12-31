@@ -8,7 +8,7 @@
 #   (3) write population to the history list
 # -data structure: two lists of integers: fish ages & population history
 # -solution to Part 1: population after 80 days
-#  TODO: for big numbers, use a dict of age counts instead of inefficient list!
+#    for big numbers, use a list of age counts instead of inefficient list of all fish
 # -solution to Part 2: population after 256 days
 
 
@@ -42,11 +42,9 @@ def age_one_day(ages):
 
 def age_one_day_part_2(age_counts):
     zero_count = age_counts[0]
-    # age_counts = [6 if x == 0 else x - 1 for x in ages] # decrement old fish ages; 0 count to 8
     del age_counts[0]  # decrement fish ages
     age_counts.append(zero_count)  # create new fish
     age_counts[6] += zero_count  # restart old fish
-    # ages += [9] * len([x for x in ages if x == 0])  # create new fish
     return age_counts
 
 
