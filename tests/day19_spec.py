@@ -1,6 +1,6 @@
 import unittest
 
-from src.day19 import load_scanners, Scanner, find_placement, place_all
+from src.day19 import load_scanners, Scanner, find_placement, reconstruct
 
 class Day19Tests(unittest.TestCase):
 
@@ -36,7 +36,7 @@ class Day19Tests(unittest.TestCase):
             (443,580,662),
             (-789,900,-551),
             (459,-707,401),
-        }, self.scanners_test[0].get_beacons())
+        }, self.scanners_test[0].beacons)
 
     def test_find_placement(self):
         self.assertEqual((None, None), find_placement(
@@ -45,12 +45,12 @@ class Day19Tests(unittest.TestCase):
         self.assertEqual((None, None), find_placement(
             Scanner({(0, 0, 0)}), Scanner({(0, 0, 1)}), threshold = 2
         ))
-        self.assertEqual(((-100, -100, -100), 0), find_placement(
+        self.assertEqual(((100, 100, 100), 0), find_placement(
             Scanner({(0, 0, 0), (1, 2, 3), (2, 3, 4)}),
             Scanner({(100, 100, 100), (101, 102, 103), (102, 103, 104)}),
             threshold = 3
         ))
-        self.assertEqual(((-100, -100, -100), 0), find_placement(
+        self.assertEqual(((100, 100, 100), 0), find_placement(
             Scanner({(0, 0, 0), (1, 2, 3), (2, 3, 4), (-2, -7, 15)}),
             Scanner({(100, 100, 100), (101, 102, 103), (102, 103, 104), (-4, 3, -10)}),
             threshold = 3
@@ -60,32 +60,39 @@ class Day19Tests(unittest.TestCase):
             Scanner({(100, 100, 100), (101, 102, 103), (102, 103, 104), (-4, 3, -10)}),
             threshold = 4
         ))
-        self.assertEqual(((68, -1246, -43), 2), find_placement(
+        self.assertEqual(((-68, 1246, 43), 2), find_placement(
             self.scanners_test[0],
             self.scanners_test[1],
             threshold = 12
         ))
-        self.assertEqual(((1125, -72, 168), 20), find_placement(
+        self.assertEqual(((-1125, 72, -168), 20), find_placement(
             self.scanners_test[4].oriented(8),
             self.scanners_test[2],
             threshold = 12
         ))
-        self.assertEqual(((-160, -1134, 23), 2), find_placement(
+        self.assertEqual(((160, 1134, -23), 2), find_placement(
             self.scanners_test[1].oriented(2),
             self.scanners_test[3],
             threshold = 12
         ))
-        self.assertEqual(((-88, 113, 1104), 8), find_placement(
+        self.assertEqual(((88, -113, -1104), 8), find_placement(
             self.scanners_test[1].oriented(2),
             self.scanners_test[4],
             threshold = 12
         ))
 
-    def test_place_all(self):
-        self.assertEqual({
-            ((0, 0, 0), self.scanners_test[0]),
-            ((68, -1246, -43), self.scanners_test[1].oriented(2)),
-            ((68, -1246, -43), self.scanners_test[2].oriented(20)),
-            ((1105, -1205, 1229), self.scanners_test[3].oriented(2)),
-            ((-92, -2380, -20), self.scanners_test[4].oriented(8)),
-        }, place_all(self.scanners_test))
+    def test_reconstruct(self):
+        reconstruction, placements = reconstruct(self.scanners_test)
+        self.assertEqual([
+            ((0, 0, 0), 0),
+            ((-68, 1246, 43), 2),
+            ((-1105, 1205, -1229), 20),
+            ((92, 2380, 20), 2),
+            ((20, 1133, -1061), 8),
+        ], placements)
+
+        self.assertEqual(79, len(reconstruction.beacons))
+
+    def test_reconstruct_tm(self):
+        reconstruction, _ = reconstruct(self.scanners_tm)
+        self.assertEqual(496, len(reconstruction.beacons))
