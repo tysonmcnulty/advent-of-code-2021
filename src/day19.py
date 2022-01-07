@@ -84,7 +84,7 @@ def find_placement(scanner, other, threshold = 12):
             for o in other_beacons:
                 offset = shift_one(o, b)
                 shifted_other_beacons = shift(other_beacons, offset)
-                if len(shifted_other_beacons & beacons) >= threshold:
+                if len(beacons & shifted_other_beacons) >= threshold:
                     return (offset, orientation)
 
     return (None, None)

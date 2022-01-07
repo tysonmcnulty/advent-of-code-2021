@@ -1,5 +1,7 @@
 import unittest
 
+from itertools import combinations
+
 from src.day19 import load_scanners, Scanner, find_placement, reconstruct
 
 class Day19Tests(unittest.TestCase):
@@ -93,6 +95,20 @@ class Day19Tests(unittest.TestCase):
 
         self.assertEqual(79, len(reconstruction.beacons))
 
+        self.assertEqual(3621, max_manhattan_distance(map(lambda it: it[0], placements)))
+
     def test_reconstruct_tm(self):
-        reconstruction, _ = reconstruct(self.scanners_tm)
+        reconstruction, placements = reconstruct(self.scanners_tm)
+
         self.assertEqual(496, len(reconstruction.beacons))
+        self.assertEqual(14478, max_manhattan_distance(map(lambda it: it[0], placements)))
+
+
+def max_manhattan_distance(coordinates):
+    manhattan_distance = lambda coordinate_pair: sum(abs(a - b) for a, b in zip(*coordinate_pair))
+
+    max_pair = max(combinations(coordinates, r = 2), key = manhattan_distance)
+
+    print(f"max_pair: {max_pair}")
+
+    return manhattan_distance(max_pair)
