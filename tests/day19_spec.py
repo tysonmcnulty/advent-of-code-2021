@@ -1,3 +1,4 @@
+import os
 import unittest
 
 from itertools import combinations
@@ -62,6 +63,9 @@ class Day19Tests(unittest.TestCase):
             Scanner({(100, 100, 100), (101, 102, 103), (102, 103, 104), (-4, 3, -10)}),
             threshold = 4
         ))
+
+    @unittest.skipUnless(bool(os.getenv('AOC_RUN_SLOW_TESTS')), 'slow test')
+    def test_find_overlap_test(self):
         self.assertEqual(((-68, 1246, 43), 2), find_placement(
             self.scanners_test[0],
             self.scanners_test[1],
@@ -83,6 +87,7 @@ class Day19Tests(unittest.TestCase):
             threshold = 12
         ))
 
+    @unittest.skipUnless(bool(os.getenv('AOC_RUN_SLOW_TESTS')), 'slow test')
     def test_reconstruct(self):
         reconstruction, placements = reconstruct(self.scanners_test)
         self.assertEqual([
@@ -97,6 +102,7 @@ class Day19Tests(unittest.TestCase):
 
         self.assertEqual(3621, max_manhattan_distance(map(lambda it: it[0], placements)))
 
+    @unittest.skipUnless(bool(os.getenv('AOC_RUN_SLOW_TESTS')), 'slow test')
     def test_reconstruct_tm(self):
         reconstruction, placements = reconstruct(self.scanners_tm)
 
