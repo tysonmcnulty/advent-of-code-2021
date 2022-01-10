@@ -10,7 +10,7 @@ def load_amphipod_diagram(amphipod_diagram_file):
                 if match:
                     amphipods[char] |= { (column_number, line_number) }
 
-    return amphipods
+    return frozenset(map(lambda kv: (kv[0], frozenset(kv[1])), amphipods.items()))
 
 class AmphipodGraph:
     def __init__(
@@ -48,6 +48,11 @@ class AmphipodGraph:
         n1, n2 = edge
         self._adjacencies[n1].add(n2)
         self._adjacencies[n2].add(n1)
+
+    def neighbors(self, node):
+        if node in self._adjacencies.keys(): return self._adjacencies[node]
+
+        raise KeyError()
 
     @property
     def nodes(self):

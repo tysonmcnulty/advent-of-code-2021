@@ -9,12 +9,7 @@ class Day23Tests(unittest.TestCase):
     def setUpClass(cls):
         cls.amphipods_test = load_amphipod_diagram('data/day23_amphipod_diagram_test.txt')
         cls.amphipods_tm = load_amphipod_diagram('data/day23_amphipod_diagram_tm.txt')
-        cls.amphipods_target = {
-            "A": {(3, 2), (3, 3)},
-            "B": {(5, 2), (5, 3)},
-            "C": {(7, 2), (7, 3)},
-            "D": {(9, 2), (9, 3)}
-        }
+        cls.amphipods_target = load_amphipod_diagram('data/day23_amphipod_diagram_target.txt')
 
     def test_load_amphipod_diagram(self):
         self.assertEqual({
@@ -30,6 +25,13 @@ class Day23Tests(unittest.TestCase):
             "C": {(3, 2), (3, 3)},
             "D": {(5, 3), (9, 2)}
         }, dict(self.amphipods_tm))
+
+        self.assertEqual({
+            "A": {(3, 2), (3, 3)},
+            "B": {(5, 2), (5, 3)},
+            "C": {(7, 2), (7, 3)},
+            "D": {(9, 2), (9, 3)}
+        }, dict(self.amphipods_target))
 
     def test_amphipod_graph(self):
         amphipod_graph = AmphipodGraph()
