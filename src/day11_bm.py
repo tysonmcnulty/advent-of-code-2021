@@ -1,18 +1,5 @@
 # Day 10: Dumbo Octopus
-# Part 1: Find the illegal closing character which corrupts a
-#   line of navigation subsystem output.
-
 # -read the energy levels from text file
-# -use try...except to avoid IndexError at edges
-
-# -in each line, search for the first incorrect closing character
-# -starting from the left, find the first unused closing char
-#   -if no more available, this line is incomplete
-# -does the first (to the left) unused opening char match?
-#   -if a match, mark both positions as used; search (right) for next closing char
-#   -if not a match, save the illegal closing char; move to next line
-# -Part 1 solution: calc the total syntax score for all illegal closing chars found
-# Part 2: autocomplete the incomplete lines; ignore the corrupt lines
 
 
 class EnergyLevelsGrid:
@@ -85,13 +72,6 @@ class EnergyLevelsGrid:
             if self.step() == octopus_count:
                 break
         return step_count + 1
-
-    # @property
-    # def syntax_error_score(self):
-    #     return sum(
-    #         self._illegal_count[x] * self._syntax_error_points[x]
-    #         for x in self._illegal_count
-    #     )
 
 
 def load_file(energy_levels_file):
